@@ -1,13 +1,109 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 auto;
+} */
+
+html {
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+
+body #root {
+  background-color: #abd9ff;
+  background-image: linear-gradient(#abd9ff, #e1ffee);
+  color: black;
+  display: flex;
+  font-family: sans-serif;
+  height: 100%;
+  justify-content: center;
+  padding: 15px;
+}
+
+.Card {
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  max-height: fit-content;
+  padding: 15px;
+}
+
+.Container {
+  align-items: center;
+  background-color: white;
+  border: solid 1px black;
+  cursor: pointer;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  font-size: 20px;
+  font-weight: bold;
+  height: auto;
+  justify-content: center;
+  padding: 10px;
+  transition: 0.3s;
+  user-select: none;
+}
+
+.Container:before {
+  /* padding-top: 100%; */
+  content: "";
+  float: left;
+}
+
+.Block:hover {
+  background-color: #caf3fe;
+}
+
+.Container div {
+  display: flex;
+  flex-direction: column;
+  /* margin: 10px 0; */
+}
+
+.Column {
+  display: flex;
+  flex-flow: row;
+  /* border: solid 1px black; */
+}
+
+.Block {
+  border: solid 1px black;
+  padding: 15px;
+  line-height: 70%;
+}
+
+.Column:nth-child(3) {
+  border-right: solid 4px black;
+}
+.Column:nth-child(3),
+.Column:nth-child(6),
+.Column:nth-child(9) {
+  border-right: solid 4px black;
+}
+
+.Column:nth-child(1) {
+  border-left: solid 4px black;
+}
+
+.Block:nth-child(1),
+.Block:nth-child(4),
+.Block:nth-child(7) {
+  border-top: solid 4px black;
+}
+
+.Block:nth-child(9) {
+  border-bottom: solid 4px black;
 }
