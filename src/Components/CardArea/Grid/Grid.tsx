@@ -1,8 +1,25 @@
-import { Children } from "react";
+import { FC, Children, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { AnyAction, Dispatch } from "redux";
+import { createGrid } from "../../../reducers/actions";
+
+import createFullGrid from "../../../sudoku-logics/createFullGrid";
+import fillGrid from "../../../sudoku-logics/fillGrid";
+import { GRID } from "../../../utils/types";
 import Block from "../Block/Block";
 import "./Grid.css";
 
 function Grid(): JSX.Element {
+  //   const grid: GRID = createFullGrid();
+  //   console.log(grid);
+
+  const dispatch = useDispatch<Dispatch<AnyAction>>();
+  const create = useCallback(() => dispatch(createGrid()), [dispatch]);
+
+  useEffect(() => {
+    create();
+  }, [create]);
+
   return (
     <div className="Container" data-cy="grid-container">
       {Children.toArray(
@@ -30,3 +47,17 @@ function Grid(): JSX.Element {
 }
 
 export default Grid;
+
+// const grid: GRID = [
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+//   ];
+//   fillGrid(grid);
+//   console.log(grid);
