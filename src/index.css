@@ -79,7 +79,8 @@ body #root {
   /* border: solid 1px black; */
 }
 
-.Block {
+.Block,
+.Block-Active {
   border: solid 1px black;
   padding: 15px;
   line-height: 70%;
@@ -105,5 +106,19 @@ body #root {
 }
 
 .Block:nth-child(9) {
+  border-bottom: solid 4px black;
+}
+
+.Block-Active {
+  background-color: #a0e9fd;
+}
+
+.Block-Active:nth-child(1),
+.Block-Active:nth-child(4),
+.Block-Active:nth-child(7) {
+  border-top: solid 4px black;
+}
+
+.Block-Active:nth-child(9) {
   border-bottom: solid 4px black;
 }

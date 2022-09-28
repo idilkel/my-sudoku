@@ -15,6 +15,7 @@
     "notyf": "^3.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-mousetrap": "^2.0.4",
     "react-icons": "^4.4.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.2.1",
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-hook-mousetrap": "^2.0.0",
     "@types/react-redux": "^7.1.24"
   }
 }

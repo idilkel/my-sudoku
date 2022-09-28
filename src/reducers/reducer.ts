@@ -11,6 +11,9 @@ function reducer(state = initialState, action: AnyAction): IReducer {
     case types.CREATE_GRID: {
       return { ...state, grid: createFullGrid() };
     }
+    case types.SELECT_BLOCK: {
+      return { ...state, selectedBlock: action.coords }; //action.coords from actions const select
+    }
     default:
       return state;
   }
