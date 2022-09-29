@@ -1,0 +1,7 @@
+.Numbers {
+  display: flex;
+  /* flex-flow: row; */
+  /* flex-direction: row; */
+  justify-content: center;
+  align-items: space-between;
+}

@@ -2,32 +2,45 @@ import { FC, Children, useEffect, useCallback } from "react";
 import useMouseTrap from "react-hook-mousetrap";
 import { useDispatch, useSelector } from "react-redux";
 import { AnyAction, Dispatch } from "redux";
-import { createGrid, selectBlock } from "../../../reducers/actions";
+import { createGrid, fillBlock, selectBlock } from "../../../reducers/actions";
 import { IReducer } from "../../../reducers/interfaces";
 
 import createFullGrid from "../../../sudoku-logics/createFullGrid";
 import fillGrid from "../../../sudoku-logics/fillGrid";
-import { BLOCK_COORDS, GRID, INDEX } from "../../../utils/types";
+import { BLOCK_COORDS, GRID, INDEX, N, NUMBERS } from "../../../utils/types";
 import Block from "../Block/Block";
 import "./Grid.css";
 
 interface IState {
   selectedBlock?: BLOCK_COORDS;
+  selectedValue?: N;
+  solvedGrid?: GRID;
 }
 
 function Grid(): JSX.Element {
   //   const grid: GRID = createFullGrid();
   //   console.log(grid);
 
-  const state = useSelector<IReducer, IState>(({ selectedBlock }) => ({
-    selectedBlock,
-  }));
+  const state = useSelector<IReducer, IState>(
+    ({ selectedBlock, solvedGrid, workingGrid }) => ({
+      selectedBlock,
+      selectedValue:
+        workingGrid && selectedBlock
+          ? workingGrid[selectedBlock[0]][selectedBlock[1]]
+          : 0,
+      solvedGrid,
+    })
+  );
   const dispatch = useDispatch<Dispatch<AnyAction>>();
   const create = useCallback(() => dispatch(createGrid()), [dispatch]);
 
-  useEffect(() => {
-    create();
-  }, [create]);
+  const fill = useCallback(
+    (n: NUMBERS) => {
+      if (state.selectedBlock && state.selectedValue === 0)
+        dispatch(fillBlock(n, state.selectedBlock));
+    },
+    [dispatch, state.selectedBlock, state.selectedValue]
+  );
 
   //do something only if the selected block is selected
   //SelectedBlock has 2 elements: row at index 0 and col at index 1.
@@ -77,10 +90,25 @@ function Grid(): JSX.Element {
   }
 
   //mapping keyboard keys
+  useMouseTrap("1", () => fill(1));
+  useMouseTrap("2", () => fill(2));
+  useMouseTrap("3", () => fill(3));
+  useMouseTrap("4", () => fill(4));
+  useMouseTrap("5", () => fill(5));
+  useMouseTrap("6", () => fill(6));
+  useMouseTrap("7", () => fill(7));
+  useMouseTrap("8", () => fill(8));
+  useMouseTrap("9", () => fill(9));
   useMouseTrap("down", moveDown);
   useMouseTrap("left", moveLeft);
   useMouseTrap("right", moveRight);
   useMouseTrap("up", moveUp);
+
+  useEffect(() => {
+    if (!state.solvedGrid) {
+      create();
+    }
+  }, [create, state.solvedGrid]);
 
   return (
     <div className="Container" data-cy="grid-container">

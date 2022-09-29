@@ -1,0 +1,8 @@
+.NewButton {
+}
+
+.NewButton button {
+  display: block;
+  width: 100%;
+  border: none;
+}

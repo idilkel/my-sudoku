@@ -1,11 +1,11 @@
-/* html,
+html,
 body,
 #root {
   width: 100%;
   height: 100%;
-  margin: 0 auto;
-  padding: 0 auto;
-} */
+  margin: 0;
+  padding: 0;
+}
 
 html {
   height: 100%;
@@ -35,7 +35,7 @@ body #root {
   display: flex;
   flex: 1;
   flex-direction: column;
-  max-height: fit-content;
+  /* max-height: fit-content; */
   padding: 15px;
 }
 
@@ -82,8 +82,14 @@ body #root {
 .Block,
 .Block-Active {
   border: solid 1px black;
-  padding: 15px;
+  padding: 14px;
   line-height: 70%;
+  height: min(1vw, 10px);
+  width: min(1vw, 10px);
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Column:nth-child(3) {
@@ -121,4 +127,38 @@ body #root {
 
 .Block-Active:nth-child(9) {
   border-bottom: solid 4px black;
+}
+
+.Block-Puzzle {
+  font-weight: bold;
+}
+
+.Button {
+  align-items: center;
+  background-color: black;
+  border: 2px solid black;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  /* flex: 1; */
+  font-size: 16px;
+  font-weight: bold;
+  height: 40px;
+  justify-content: center;
+  margin: 4px 2px;
+  min-height: 40px;
+  min-width: 30px;
+  opacity: 0.9;
+  padding: 0;
+  transition: 0.3s;
+}
+
+.Button:focus {
+  background-color: gray;
+  outline: none;
+}
+
+.Button:hover {
+  opacity: 0.6;
 }

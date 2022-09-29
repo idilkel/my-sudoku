@@ -15,18 +15,25 @@ interface BlockProps {
 
 interface IState {
   isActive: boolean;
+  isPuzzle: boolean;
   value: N;
 }
 
 function Block(props: BlockProps): JSX.Element {
-  const state = useSelector<IReducer, IState>(({ grid, selectedBlock }) => ({
-    isActive: selectedBlock
-      ? selectedBlock[0] === props.rowIndex &&
-        selectedBlock[1] === props.colIndex
-      : false,
-    value: grid ? grid[props.rowIndex][props.colIndex] : 0,
-    // value: 0,
-  }));
+  const state = useSelector<IReducer, IState>(
+    ({ challengeGrid, workingGrid, selectedBlock }) => ({
+      isActive: selectedBlock
+        ? selectedBlock[0] === props.rowIndex &&
+          selectedBlock[1] === props.colIndex
+        : false,
+      isPuzzle:
+        challengeGrid && challengeGrid[props.rowIndex][props.colIndex] !== 0
+          ? true
+          : false,
+      value: workingGrid ? workingGrid[props.rowIndex][props.colIndex] : 0,
+      // value: 0,
+    })
+  );
 
   const dispatch = useDispatch<Dispatch<AnyAction>>();
 
@@ -37,7 +44,11 @@ function Block(props: BlockProps): JSX.Element {
   }
   return (
     <div
-      className={state.isActive ? "Block-Active" : "Block"}
+      className={
+        `${state.isActive ? "Block-Active" : "Block"}` +
+        " " +
+        `${state.isPuzzle ? "Block-Puzzle" : ""}`
+      }
       //   active={state.isActive}
       data-cy={`block-${props.rowIndex}-${props.colIndex}`}
       onClick={handleClick}
